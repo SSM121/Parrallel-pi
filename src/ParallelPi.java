@@ -32,7 +32,7 @@ public class ParallelPi{
 		}
 		ThreadSafeQueue task = new ThreadSafeQueue();
 		for(int i = 1; i <= 1024; i++){
-			task.enqueue(i);
+			task.enqueue(new Digit(i));
 		}
 		switch(order){
 			case 1:
@@ -42,7 +42,6 @@ public class ParallelPi{
 				task.random();
 				break;
 		}
-		System.out.println(task.toString());
 //		Bpp b = new Bpp();
 //		System.out.println(b.getDecimal(54) / 100000000);
 		DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
@@ -61,10 +60,3 @@ public class ParallelPi{
 }
 
 
-class digit{
-	int digit;
-	digit(int d){
-		this.digit = d;
-	}
-
-}
