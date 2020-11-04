@@ -30,6 +30,21 @@ public class ParallelPi{
 				}
 			}
 		}
+		ThreadSafeQueue task = new ThreadSafeQueue();
+		for(int i = 1; i <= 1024; i++){
+			task.enqueue(i);
+		}
+		switch(order){
+			case 1:
+				task.reverse();
+				break;
+			case 2:
+				task.random();
+				break;
+		}
+		System.out.println(task.toString());
+//		Bpp b = new Bpp();
+//		System.out.println(b.getDecimal(54) / 100000000);
 		DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
 		Terminal terminal = null;
 		try{
