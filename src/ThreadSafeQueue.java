@@ -8,7 +8,7 @@ public class ThreadSafeQueue{
 		qList = new LinkedList<Digit>();
 	}
 	public boolean isEmpty() { return qList.isEmpty(); } //checks if empty
-	public void enqueue(Digit item) { qList.addLast(item); } //adds object to array
+	public synchronized void enqueue(Digit item) { qList.addLast(item); } //adds object to array
 	public synchronized Digit dequeue() { //get an item off the list. only one thread can pull at a time.
 		if (qList.isEmpty()) return null;
 		else return qList.removeFirst();

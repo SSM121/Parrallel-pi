@@ -6,7 +6,7 @@ public class Digit{
 		this.digit = d;
 	}
 	public void addPi(int x){
-		x = this.pi;
+		this.pi = x;
 	}
 	public int getPi(){
 		return this.pi;

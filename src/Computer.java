@@ -8,7 +8,13 @@ public class Computer implements Runnable{
 
 	@Override
 	public void run(){
-
+		Digit curr;
+		Bpp bpp = new Bpp();
+		while((curr = inBound.dequeue()) != null){
+			curr.addPi(bpp.getDecimal(curr.getNum()) / 100000000);
+			outBound.enqueue(curr);
+		}
+		//System.out.println("Computer done!");
 	}
 
 }

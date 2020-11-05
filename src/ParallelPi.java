@@ -10,7 +10,9 @@ public class ParallelPi{
 	 * 2 = random */
 	static int order = 0;
 	static int workers;
+
 	public static void main(String[] args){
+		long startTime = System.currentTimeMillis();
 		workers = Runtime.getRuntime().availableProcessors();
 		if(args.length > 0){
 			if(args[0].compareTo("-reverse") == 0){
@@ -42,19 +44,25 @@ public class ParallelPi{
 				break;
 		}
 		try{
-			Display display = new Display();
+			Display display = new Display(task, result);
+			//System.out.format("The number of works is: %d\n", workers);
 			for(int i = 0; i < workers; i++)
 			{
 				new Thread(new Computer(task, result), "Computer: " + i).start();
 			}
+			Thread write = new Thread(display, "Display");
+			write.start();
+			write.join();
 
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-
+		long endTime = System.currentTimeMillis();
+ 
+        	long timeElapsed = endTime - startTime;
+		System.out.format("\nIt took %d milliseconds to calculate pi\n", timeElapsed);
 	}
-
 }
 
 
