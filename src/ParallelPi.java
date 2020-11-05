@@ -1,11 +1,7 @@
 import java.io.IOException;
 import java.lang.System;
+import java.lang.Runtime;
 
-import com.googlecode.lanterna.SGR;
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
 
 
 public class ParallelPi{
@@ -13,7 +9,9 @@ public class ParallelPi{
 	 * 1 = reverse
 	 * 2 = random */
 	static int order = 0;
+	static int workers;
 	public static void main(String[] args){
+		workers = Runtime.getRuntime().availableProcessors();
 		if(args.length > 0){
 			if(args[0].compareTo("-reverse") == 0){
 				order = 1;
@@ -31,6 +29,7 @@ public class ParallelPi{
 			}
 		}
 		ThreadSafeQueue task = new ThreadSafeQueue();
+		ThreadSafeQueue result = new ThreadSafeQueue();
 		for(int i = 1; i <= 1024; i++){
 			task.enqueue(new Digit(i));
 		}
@@ -42,16 +41,15 @@ public class ParallelPi{
 				task.random();
 				break;
 		}
-//		Bpp b = new Bpp();
-//		System.out.println(b.getDecimal(54) / 100000000);
-		DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
-		Terminal terminal = null;
 		try{
-			terminal = defaultTerminalFactory.createTerminal();
-			terminal.clearScreen();
+			Display display = new Display();
+			for(int i = 0; i < workers; i++)
+			{
+				new Thread(new Computer(task, result), "Computer: " + i).start();
+			}
 
 		}
-		catch(IOException e) {
+		catch(Exception e) {
 			e.printStackTrace();
 		}
 
