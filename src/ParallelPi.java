@@ -44,7 +44,7 @@ public class ParallelPi{
 				break;
 		}
 		try{
-			Display display = new Display(task, result);
+			Display display = new Display(result);
 			//System.out.format("The number of works is: %d\n", workers);
 			for(int i = 0; i < workers; i++)
 			{

@@ -9,8 +9,8 @@ public class Display implements Runnable{
 	ThreadSafeQueue task;
 	ThreadSafeQueue results;
 	Terminal terminal;;
-	Display(ThreadSafeQueue task, ThreadSafeQueue results)throws Exception{
-		this.task = task;
+	Display(ThreadSafeQueue results)throws Exception{
+		
 		this.results = results;
 		DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
 		terminal = defaultTerminalFactory.createTerminal();
