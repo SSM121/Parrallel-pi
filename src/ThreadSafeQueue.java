@@ -1,10 +1,10 @@
 import java.util.LinkedList;
 import java.util.Collections;
-
+//queue that is a thread protected linked list
 public class ThreadSafeQueue{
-	private LinkedList<Digit> qList;
+	private LinkedList<Digit> qList; //the actual data
 
-	ThreadSafeQueue(){
+	ThreadSafeQueue(){ // a constructor
 		qList = new LinkedList<Digit>();
 	}
 	public boolean isEmpty() { return qList.isEmpty(); } //checks if empty
@@ -13,13 +13,13 @@ public class ThreadSafeQueue{
 		if (qList.isEmpty()) return null;
 		else return qList.removeFirst();
 	}
-	public void random(){
+	public void random(){ //shuffles the list
 		Collections.shuffle(qList);
 	}
-	public void reverse(){
+	public void reverse(){ //reveses the list
 		Collections.reverse(qList);
 	}
-	public String toString(){
+	public String toString(){ //while not needed for the assignment this was for debugging
 		return qList.toString();
 	}
 

@@ -1,4 +1,4 @@
-
+//simple class for keeping track of a digits loacation and value of pi
 public class Digit{
 	int digit;
 	int pi;
